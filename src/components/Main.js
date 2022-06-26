@@ -15,9 +15,7 @@ function Main() {
     }
 
     return (
-        <>
             <main>
-
                 <section className="profile">
                     <div className="profile__avatar">
                         <img alt="аватар" className="profile__avatar-img"/>
@@ -33,9 +31,7 @@ function Main() {
 
                 <section className="places">
                 </section>
-
             </main>
-        </>
     )
 }
 

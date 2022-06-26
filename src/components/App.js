@@ -3,6 +3,8 @@ import noPhoto from '../images/no-photo.jpg';
 import Header from "./Header.js";
 import Main from "./Main.js";
 import Footer from "./Footer.js";
+import PopupWithForm from "./PopupWithForm.js";
+import ImagePopup from "./ImagePopup.js";
 
 function App() {
     return (
