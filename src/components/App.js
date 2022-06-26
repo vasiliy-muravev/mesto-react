@@ -1,40 +1,16 @@
-import logo from './logo.svg';
-import './index.css';
-import noPhoto from './images/no-photo.jpg';
+import '../index.css';
+import noPhoto from '../images/no-photo.jpg';
+import Header from "./Header.js";
+import Main from "./Main.js";
+import Footer from "./Footer.js";
 
 function App() {
     return (
         <>
             <div className="page">
-
-                <header className="header">
-                    <div className="header__logo"></div>
-                </header>
-
-                <main>
-
-                    <section className="profile">
-                        <div className="profile__avatar">
-                            <img alt="аватар" className="profile__avatar-img"/>
-                            <button type="button" className="profile__avatar-button"></button>
-                        </div>
-                        <div className="info">
-                            <h1 className="info__title"></h1>
-                            <button type="button" className="info__redact-button"></button>
-                            <p className="info__subtitle"></p>
-                        </div>
-                        <button type="button" className="profile__add-place-button"></button>
-                    </section>
-
-                    <section className="places">
-                    </section>
-
-                </main>
-
-                <footer className="footer">
-                    <p className="footer__copyright">&copy; 2022 Mesto Russia</p>
-                </footer>
-
+                <Header/>
+                <Main/>
+                <Footer/>
             </div>
 
             <div className="popup popup_profile">
