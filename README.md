@@ -11,7 +11,7 @@ One page website on pure modern Html and CSS. Educational project from [https://
 1. Download project files
 
 - The easiest way to run a project is download zip
-  from [https://github.com/vasiliy-muravev/mesto-react](https://github.com/vasiliy-muravev/russian-travel)
+  from [https://github.com/vasiliy-muravev/mesto-react](https://github.com/vasiliy-muravev/mesto-react)
 - Or you can use the command
 
 ```sh

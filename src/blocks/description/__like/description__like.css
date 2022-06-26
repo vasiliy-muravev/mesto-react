@@ -1,0 +1,16 @@
+.description__like {
+    background-image: url(../../../images/like_empty.svg);
+    width: 22px;
+    height: 19px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    cursor: pointer;
+    margin-bottom: 3px;
+    border: none;
+    background-color: #fff;
+}
+
+.description__like:hover {
+    opacity: 0.5;
+}

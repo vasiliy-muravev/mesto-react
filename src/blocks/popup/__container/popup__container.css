@@ -1,0 +1,14 @@
+.popup__container {
+    display: flex;
+    align-items: center;
+    margin-left: calc(50vw - 215px);
+    margin-top: calc(50vh - 165px);
+    position: inherit;
+}
+
+@media screen and (max-width: 860px) {
+    .popup__container {
+        margin-left: calc(50vw - 141px);
+        margin-top: calc(50vh - 161px);
+    }
+}

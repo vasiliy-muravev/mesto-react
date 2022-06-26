@@ -1,0 +1,6 @@
+.description__like-container {
+    margin: 22px 20px 22px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

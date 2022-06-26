@@ -1,0 +1,12 @@
+.popup__form-input {
+    padding: 0 0 13px;
+    border: unset;
+    line-height: 1;
+    font-size: 14px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    outline: 0;
+}
+
+.popup__form-input:not(:first-child) {
+    padding-top: 13px;
+}
