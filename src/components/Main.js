@@ -19,7 +19,7 @@ function Main({onEditProfile, onAddPlace, onEditAvatar}) {
         <main>
             <section className="profile">
                 <div className="profile__avatar">
-                    <img src={`${userAvatar}`} alt={`${userDescription}`}
+                    <img src={`${userAvatar}`} alt={`${userName}`}
                          className="profile__avatar-img"/>
                     <button type="button" className="profile__avatar-button" onClick={onEditAvatar}></button>
                 </div>
