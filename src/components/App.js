@@ -9,24 +9,45 @@ import React from "react";
 import {useState} from "react";
 
 function App() {
+    /* Начальное состояние попапов - закрыты */
     const [isEditProfilePopupOpen, setEditProfilePopupState] = useState(false);
     const [isAddPlacePopupOpen, setAddPlacePopupState] = useState(false);
     const [isEditAvatarPopupOpen, setEditAvatarPopupState] = useState(false);
-
+    /* Обработчики открытия попапов */
     const handleEditProfileClick = () => setEditProfilePopupState(true);
     const handleAddPlaceClick = () => setAddPlacePopupState(true);
     const handleEditAvatarClick = () => setEditAvatarPopupState(true);
+    /* Обработчик закрытия попапов */
+    const closeAllPopups = () => {
+        setEditProfilePopupState(false);
+        setAddPlacePopupState(false);
+        setEditAvatarPopupState(false);
+    };
 
     return (
         <>
             <div className="page">
                 <Header/>
+
                 <Main onEditProfile={handleEditProfileClick}
                       onAddPlace={handleAddPlaceClick}
                       onEditAvatar={handleEditAvatarClick}/>
-                <PopupWithForm isOpen={isEditProfilePopupOpen} name='profile' title='Редактировать профиль'/>
-                <PopupWithForm isOpen={isAddPlacePopupOpen} name='place' title='Новое место'/>
-                <PopupWithForm isOpen={isEditAvatarPopupOpen} name='avatar-change' title='Обновить аватар'/>
+
+                <PopupWithForm onClose={closeAllPopups}
+                               isOpen={isEditProfilePopupOpen}
+                               name='profile'
+                               title='Редактировать профиль'/>
+
+                <PopupWithForm onClose={closeAllPopups}
+                               isOpen={isAddPlacePopupOpen}
+                               name='place'
+                               title='Новое место'/>
+
+                <PopupWithForm onClose={closeAllPopups}
+                               isOpen={isEditAvatarPopupOpen}
+                               name='avatar-change'
+                               title='Обновить аватар'/>
+
                 <Footer/>
             </div>
 
