@@ -7,6 +7,7 @@ import PopupWithForm from "./PopupWithForm.js";
 import ImagePopup from "./ImagePopup.js";
 import React from "react";
 import {useState} from "react";
+import {api} from '../utils/Api.js';
 
 function App() {
     /* Начальное состояние попапов - закрыты */
@@ -36,17 +37,50 @@ function App() {
                 <PopupWithForm onClose={closeAllPopups}
                                isOpen={isEditProfilePopupOpen}
                                name='profile'
-                               title='Редактировать профиль'/>
+                               title='Редактировать профиль'
+                               children={<><input name="name" type="text" placeholder="Имя"
+                                   className="popup__form-input popup__form-name"
+                                   minLength="2" maxLength="40"
+                                   id="profile-name-input" required/>
+                            <span className="popup__form-input-error profile-name-input-error"></span>
+                            <input name="about" type="text" placeholder="О себе"
+                                   className="popup__form-input popup__form-additional"
+                                   minLength="2" maxLength="200"
+                                   id="profile-profession-input" required/>
+                            <span className="popup__form-input-error profile-profession-input-error"></span>
+                            <button type="submit" className="popup__form-submit-btn">
+                                Сохранить
+                            </button></>}
+                />
 
                 <PopupWithForm onClose={closeAllPopups}
                                isOpen={isAddPlacePopupOpen}
                                name='place'
-                               title='Новое место'/>
+                               title='Новое место'
+                               children={<><input name="name" type="text" placeholder="Название"
+                                   className="popup__form-input popup__form-name"
+                                   minLength="2" maxLength="30" id="place-name-input" required/>
+                            <span className="popup__form-input-error place-name-input-error"></span>
+                            <input name="link" type="url" placeholder="Ссылка на картинку"
+                                   className="popup__form-input popup__form-additional" id="place-url-input"
+                                   required/>
+                            <span className="popup__form-input-error place-url-input-error"></span>
+                            <button type="submit" className="popup__form-submit-btn">
+                                Сохранить
+                            </button></>}
+                />
 
                 <PopupWithForm onClose={closeAllPopups}
                                isOpen={isEditAvatarPopupOpen}
                                name='avatar-change'
-                               title='Обновить аватар'/>
+                               title='Обновить аватар'
+                               children={<><input name="link" type="url" placeholder="Ссылка на картинку"
+                                   className="popup__form-input popup__form-additional" id="avatar-url-input" required/>
+                            <span className="popup__form-input-error avatar-url-input-error"></span>
+                            <button type="submit" className="popup__form-submit-btn">
+                                Сохранить
+                            </button></>}
+                />
 
                 <Footer/>
             </div>
