@@ -5,13 +5,28 @@ import Main from "./Main.js";
 import Footer from "./Footer.js";
 import PopupWithForm from "./PopupWithForm.js";
 import ImagePopup from "./ImagePopup.js";
+import React from "react";
+import {useState} from "react";
 
 function App() {
+    const [isEditProfilePopupOpen, setEditProfilePopupState] = useState(false);
+    const [isAddPlacePopupOpen, setAddPlacePopupState] = useState(false);
+    const [isEditAvatarPopupOpen, setEditAvatarPopupState] = useState(false);
+
+    const handleEditProfileClick = () => setEditProfilePopupState(true);
+    const handleAddPlaceClick = () => setAddPlacePopupState(true);
+    const handleEditAvatarClick = () => setEditAvatarPopupState(true);
+
     return (
         <>
             <div className="page">
                 <Header/>
-                <Main/>
+                <Main onEditProfile={handleEditProfileClick}
+                      onAddPlace={handleAddPlaceClick}
+                      onEditAvatar={handleEditAvatarClick}/>
+                <PopupWithForm isOpen={isEditProfilePopupOpen} name='profile' title='Редактировать профиль'/>
+                <PopupWithForm isOpen={isAddPlacePopupOpen} name='place' title='Новое место'/>
+                <PopupWithForm isOpen={isEditAvatarPopupOpen} name='avatar-change' title='Обновить аватар'/>
                 <Footer/>
             </div>
 

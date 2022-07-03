@@ -1,6 +1,6 @@
 import noPhoto from "../images/no-photo.jpg";
 
-function ImagePopup() {
+function ImagePopup({noPhoto}) {
     return (
         <div className="popup popup_picture">
             <div className="popup__picture-container">
