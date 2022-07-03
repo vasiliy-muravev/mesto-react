@@ -1,6 +1,7 @@
 import {useState} from "react";
 import React from "react";
 import {api} from '../utils/Api.js';
+import Card from "./Card.js";
 
 function Main({onEditProfile, onAddPlace, onEditAvatar}) {
     const [userName, setUserNameState] = useState('');
@@ -41,21 +42,7 @@ function Main({onEditProfile, onAddPlace, onEditAvatar}) {
             </section>
 
             <section className="places">
-                {card.map(item => {
-                    return (
-                        <article className="place" key={item._id} id={item._id}>
-                            <button type="button" className="description__delete"></button>
-                            <img className="place__image" alt={item.name} src={item.link}/>
-                            <div className="description">
-                                <h2 className="description__title">{item.name}</h2>
-                                <div className="description__like-container">
-                                    <button type="button" className="description__like"></button>
-                                    <p className="description__like-count">{item.likes ? item.likes.length : 0}</p>
-                                </div>
-                            </div>
-                        </article>
-                    )
-                })}
+                {card.map(item => <Card key={item._id} card={item}/>)}
             </section>
         </main>
     )

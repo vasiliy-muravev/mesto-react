@@ -92,4 +92,5 @@ class Api {
     }
 }
 
+
 export const api = new Api('https://mesto.nomoreparties.co/v1/cohort-42/');
