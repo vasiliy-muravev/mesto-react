@@ -6,12 +6,21 @@ function Main({onEditProfile, onAddPlace, onEditAvatar}) {
     const [userName, setUserNameState] = useState('');
     const [userDescription, setUserDescriptionState] = useState('');
     const [userAvatar, setUserAvatarState] = useState('');
+    const [card, setCardState] = useState([]);
 
+    /* В переменные состояния сохраняем имя, род занятий и аватар */
     React.useEffect(() => {
         api.getUserData().then((userData) => {
             setUserNameState(userData.name);
             setUserDescriptionState(userData.about);
             setUserAvatarState(userData.avatar);
+        })
+    }, []);
+
+    /* Передаем массив с карточками в card */
+    React.useEffect(() => {
+        api.getInitialCards().then((cardsData) => {
+            setCardState(cardsData);
         })
     }, []);
 
@@ -32,6 +41,21 @@ function Main({onEditProfile, onAddPlace, onEditAvatar}) {
             </section>
 
             <section className="places">
+                {card.map(item => {
+                    return (
+                        <article className="place" key={item._id} id={item._id}>
+                            <button type="button" className="description__delete"></button>
+                            <img className="place__image" alt={item.name} src={item.link}/>
+                            <div className="description">
+                                <h2 className="description__title">{item.name}</h2>
+                                <div className="description__like-container">
+                                    <button type="button" className="description__like"></button>
+                                    <p className="description__like-count">{item.likes ? item.likes.length : 0}</p>
+                                </div>
+                            </div>
+                        </article>
+                    )
+                })}
             </section>
         </main>
     )
