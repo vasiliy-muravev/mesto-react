@@ -1,5 +1,4 @@
 import '../index.css';
-import noPhoto from '../images/no-photo.jpg';
 import Header from "./Header.js";
 import Main from "./Main.js";
 import Footer from "./Footer.js";
@@ -13,6 +12,8 @@ function App() {
     const [isEditProfilePopupOpen, setEditProfilePopupState] = useState(false);
     const [isAddPlacePopupOpen, setAddPlacePopupState] = useState(false);
     const [isEditAvatarPopupOpen, setEditAvatarPopupState] = useState(false);
+    const [isImagePopupOpen, setImagePopupState] = useState(false);
+    const [selectedCard, setSelectedCardState] = useState({});
     /* Обработчики открытия попапов */
     const handleEditProfileClick = () => setEditProfilePopupState(true);
     const handleAddPlaceClick = () => setAddPlacePopupState(true);
@@ -22,6 +23,13 @@ function App() {
         setEditProfilePopupState(false);
         setAddPlacePopupState(false);
         setEditAvatarPopupState(false);
+        setImagePopupState(false);
+        setSelectedCardState({});
+    };
+    /* Обработчик открытия картинки при клике на карточку */
+    const handleCardClick = (card) => {
+        setSelectedCardState(card);
+        setImagePopupState(true);
     };
 
     return (
@@ -31,7 +39,9 @@ function App() {
 
                 <Main onEditProfile={handleEditProfileClick}
                       onAddPlace={handleAddPlaceClick}
-                      onEditAvatar={handleEditAvatarClick}/>
+                      onEditAvatar={handleEditAvatarClick}
+                      onCardClick={handleCardClick}
+                />
 
                 <PopupWithForm onClose={closeAllPopups}
                                isOpen={isEditProfilePopupOpen}
@@ -81,17 +91,12 @@ function App() {
                             </button></>}
                 />
 
-                <Footer/>
-            </div>
+                <ImagePopup onClose={closeAllPopups}
+                            card={selectedCard}
+                            isOpen={isImagePopupOpen}
+                />
 
-            <div className="popup popup_picture">
-                <div className="popup__picture-container">
-                    <button type="button" className="popup__close-button"></button>
-                    <div className="popup__picture-content">
-                        <img className="popup__big-picture" alt="" src={noPhoto}/>
-                        <p className="popup__picture-title"></p>
-                    </div>
-                </div>
+                <Footer/>
             </div>
 
             <div className="popup popup_place-delete">

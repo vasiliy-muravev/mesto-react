@@ -1,8 +1,16 @@
-function Card({card}) {
+function Card({card, onCardClick}) {
+    function handleClick() {
+        onCardClick(card);
+    }
+
     return (
         <article className="place" id={card._id}>
             <button type="button" className="description__delete"></button>
-            <img className="place__image" alt={card.name} src={card.link}/>
+            <img className="place__image"
+                 alt={card.name}
+                 src={card.link}
+                 onClick={handleClick}
+            />
             <div className="description">
                 <h2 className="description__title">{card.name}</h2>
                 <div className="description__like-container">
