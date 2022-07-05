@@ -3,7 +3,7 @@ import React from "react";
 import {api} from '../utils/Api.js';
 import Card from "./Card.js";
 
-function Main({onEditProfile, onAddPlace, onEditAvatar, onCardClick}) {
+function Main({onEditProfile, onAddPlace, onEditAvatar, onCardClick, onDeleteClick}) {
     const [userName, setUserNameState] = useState('');
     const [userDescription, setUserDescriptionState] = useState('');
     const [userAvatar, setUserAvatarState] = useState('');
@@ -11,6 +11,7 @@ function Main({onEditProfile, onAddPlace, onEditAvatar, onCardClick}) {
 
     /* В переменные состояния сохраняем имя, род занятий и аватар */
     React.useEffect(() => {
+        /* Во все методы api вшит приватный метод _getResponseData(res) который отлавливает ошибки */
         api.getUserData().then((userData) => {
             setUserNameState(userData.name);
             setUserDescriptionState(userData.about);
@@ -29,20 +30,21 @@ function Main({onEditProfile, onAddPlace, onEditAvatar, onCardClick}) {
         <main>
             <section className="profile">
                 <div className="profile__avatar">
-                    <img src={`${userAvatar}`} alt={`${userName}`}
-                         className="profile__avatar-img"/>
-                    <button type="button" className="profile__avatar-button" onClick={onEditAvatar}></button>
+                    {userAvatar && (<img src={userAvatar} alt={userName}
+                         className="profile__avatar-img"/>)}
+                    <button type="button" className="profile__avatar-button" onClick={onEditAvatar}/>
                 </div>
                 <div className="info">
                     <h1 className="info__title">{userName}</h1>
-                    <button type="button" className="info__redact-button" onClick={onEditProfile}></button>
+                    <button type="button" className="info__redact-button" onClick={onEditProfile}/>
                     <p className="info__subtitle">{userDescription}</p>
                 </div>
-                <button type="button" className="profile__add-place-button" onClick={onAddPlace}></button>
+                <button type="button" className="profile__add-place-button" onClick={onAddPlace}/>
             </section>
 
             <section className="places">
-                {card.map(item => <Card key={item._id} card={item} onCardClick={onCardClick}/>)}
+                {card.map(item => <Card key={item._id} card={item} onCardClick={onCardClick}
+                                        onDeleteClick={onDeleteClick}/>)}
             </section>
         </main>
     )

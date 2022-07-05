@@ -1,11 +1,11 @@
-function Card({card, onCardClick}) {
+function Card({card, onCardClick, onDeleteClick}) {
     function handleClick() {
         onCardClick(card);
     }
 
     return (
         <article className="place" id={card._id}>
-            <button type="button" className="description__delete"></button>
+            <button type="button" className="description__delete" onClick={onDeleteClick}/>
             <img className="place__image"
                  alt={card.name}
                  src={card.link}
@@ -14,7 +14,7 @@ function Card({card, onCardClick}) {
             <div className="description">
                 <h2 className="description__title">{card.name}</h2>
                 <div className="description__like-container">
-                    <button type="button" className="description__like"></button>
+                    <button type="button" className="description__like"/>
                     <p className="description__like-count">{card.likes ? card.likes.length : 0}</p>
                 </div>
             </div>
