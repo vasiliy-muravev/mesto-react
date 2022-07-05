@@ -11,19 +11,22 @@ function Main({onEditProfile, onAddPlace, onEditAvatar, onCardClick, onDeleteCli
 
     /* В переменные состояния сохраняем имя, род занятий и аватар */
     React.useEffect(() => {
-        /* Во все методы api вшит приватный метод _getResponseData(res) который отлавливает ошибки */
         api.getUserData().then((userData) => {
             setUserNameState(userData.name);
             setUserDescriptionState(userData.about);
             setUserAvatarState(userData.avatar);
-        })
+        }).catch((err) => {
+            console.log(err);
+        });
     }, []);
 
     /* Передаем массив с карточками в card */
     React.useEffect(() => {
         api.getInitialCards().then((cardsData) => {
             setCardState(cardsData);
-        })
+        }).catch((err) => {
+            console.log(err);
+        });
     }, []);
 
     return (
