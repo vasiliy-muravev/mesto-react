@@ -18,6 +18,7 @@ function App() {
     const [isImagePopupOpen, setImagePopupState] = useState(false);
     const [selectedCard, setSelectedCardState] = useState({});
     const [isPlaceDeletePopupOpen, setPlaceDeletePopupOpen] = useState(false);
+
     /* Контекст текущего пользователя */
     const [currentUser, setCurrentUser] = useState({});
     /* Эффект получения данных о пользователе при монтировании */
@@ -28,7 +29,6 @@ function App() {
             console.log(err);
         });
     }, []);
-
 
     /* Обработчики открытия попапов */
     const handleEditProfileClick = () => setEditProfilePopupState(true);
