@@ -2,23 +2,27 @@ import {useState} from "react";
 import React from "react";
 import {api} from '../utils/Api.js';
 import Card from "./Card.js";
+import {CurrentUserContext} from '../contexts/CurrentUserContext.js';
 
 function Main({onEditProfile, onAddPlace, onEditAvatar, onCardClick, onDeleteClick}) {
-    const [userName, setUserNameState] = useState('');
-    const [userDescription, setUserDescriptionState] = useState('');
-    const [userAvatar, setUserAvatarState] = useState('');
+    // const [userName, setUserNameState] = useState('');
+    // const [userDescription, setUserDescriptionState] = useState('');
+    // const [userAvatar, setUserAvatarState] = useState('');
     const [card, setCardState] = useState([]);
 
+    /* Подписываемся на контекст UserContext */
+    const user = React.useContext(CurrentUserContext);
+
     /* В переменные состояния сохраняем имя, род занятий и аватар */
-    React.useEffect(() => {
-        api.getUserData().then((userData) => {
-            setUserNameState(userData.name);
-            setUserDescriptionState(userData.about);
-            setUserAvatarState(userData.avatar);
-        }).catch((err) => {
-            console.log(err);
-        });
-    }, []);
+    // React.useEffect(() => {
+    //     api.getUserData().then((userData) => {
+    //         setUserNameState(userData.name);
+    //         setUserDescriptionState(userData.about);
+    //         setUserAvatarState(userData.avatar);
+    //     }).catch((err) => {
+    //         console.log(err);
+    //     });
+    // }, []);
 
     /* Передаем массив с карточками в card */
     React.useEffect(() => {
@@ -33,14 +37,14 @@ function Main({onEditProfile, onAddPlace, onEditAvatar, onCardClick, onDeleteCli
         <main>
             <section className="profile">
                 <div className="profile__avatar">
-                    {userAvatar && (<img src={userAvatar} alt={userName}
+                    {user.avatar && (<img src={user.avatar} alt={user.name}
                          className="profile__avatar-img"/>)}
                     <button type="button" className="profile__avatar-button" onClick={onEditAvatar}/>
                 </div>
                 <div className="info">
-                    <h1 className="info__title">{userName}</h1>
+                    <h1 className="info__title">{user.name}</h1>
                     <button type="button" className="info__redact-button" onClick={onEditProfile}/>
-                    <p className="info__subtitle">{userDescription}</p>
+                    <p className="info__subtitle">{user.about}</p>
                 </div>
                 <button type="button" className="profile__add-place-button" onClick={onAddPlace}/>
             </section>
