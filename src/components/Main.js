@@ -28,6 +28,12 @@ function Main({onEditProfile, onAddPlace, onEditAvatar, onCardClick, onDeleteCli
         });
     }
 
+    function handleCardDelete(card) {
+        /* Проверяем, что карточка принадлежит пользователю */
+        console.log(card);
+        const isLiked = card.likes.some(i => i._id === user._id);
+    }
+
     return (
         <main>
             <section className="profile">
@@ -46,7 +52,7 @@ function Main({onEditProfile, onAddPlace, onEditAvatar, onCardClick, onDeleteCli
 
             <section className="places">
                 {cards.map(item => <Card key={item._id} card={item} onCardClick={onCardClick}
-                                        onDeleteClick={onDeleteClick} onCardLike={handleCardLike}/>)}
+                                        onDeleteClick={onDeleteClick} onCardLike={handleCardLike} />)}
             </section>
         </main>
     )

@@ -21,9 +21,13 @@ function Card({card, onCardClick, onDeleteClick, onCardLike}) {
         onCardLike(card);
     }
 
+    function handleDeleteClick() {
+        onDeleteClick(card);
+    }
+
     return (
         <article className="place" id={card._id}>
-            <button type="button" className={cardDeleteButtonClassName} onClick={onDeleteClick}/>
+            <button type="button" className={cardDeleteButtonClassName} onClick={handleDeleteClick}/>
             <img className="place__image"
                  alt={card.name}
                  src={card.link}

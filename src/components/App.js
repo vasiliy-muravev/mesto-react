@@ -34,7 +34,7 @@ function App() {
     const handleEditProfileClick = () => setEditProfilePopupState(true);
     const handleAddPlaceClick = () => setAddPlacePopupState(true);
     const handleEditAvatarClick = () => setEditAvatarPopupState(true);
-    const handlePlaceDeleteClick = () => setPlaceDeletePopupOpen(true);
+
     /* Обработчик закрытия попапов */
     const closeAllPopups = () => {
         setEditProfilePopupState(false);
@@ -44,10 +44,18 @@ function App() {
         setSelectedCardState({});
         setPlaceDeletePopupOpen(false);
     };
+
     /* Обработчик открытия картинки при клике на карточку */
     const handleCardClick = (card) => {
         setSelectedCardState(card);
         setImagePopupState(true);
+    };
+
+    /* Обработчик передачи карточки в попап удаления */
+    const handlePlaceDeleteClick = (card) => {
+        console.log(card);
+        setSelectedCardState(card);
+        setPlaceDeletePopupOpen(true);
     };
 
     return (
@@ -111,6 +119,7 @@ function App() {
                 />
 
                 <PopupPlaceDelete onClose={closeAllPopups}
+                                  card={selectedCard}
                                   isOpen={isPlaceDeletePopupOpen}
                 />
 
