@@ -5,9 +5,10 @@ import Footer from "./Footer.js";
 import PopupWithForm from "./PopupWithForm.js";
 import ImagePopup from "./ImagePopup.js";
 import PopupPlaceDelete from "./PopupPlaceDelete.js";
+import EditProfilePopup from "./EditProfilePopup";
 import React from "react";
 import {useState} from "react";
-import {api} from "../utils/Api";
+import {api, renameButton} from "../utils/Api";
 import {CurrentUserContext, user} from '../contexts/CurrentUserContext.js';
 
 function App() {
@@ -53,9 +54,18 @@ function App() {
 
     /* Обработчик передачи карточки в попап удаления */
     const handlePlaceDeleteClick = (card) => {
-        console.log(card);
         setSelectedCardState(card);
         setPlaceDeletePopupOpen(true);
+    };
+
+    const handleUpdateUser = (formData) => {
+        renameButton('.popup_type_profile', 'Сохранение...');
+        api.setUserData(formData).then((userData) => {
+            setCurrentUser(userData);
+            closeAllPopups();
+        }).finally(() => {
+                renameButton('.popup_type_profile', 'Сохранить');
+            });
     };
 
     return (
@@ -68,24 +78,14 @@ function App() {
                       onEditAvatar={handleEditAvatarClick}
                       onCardClick={handleCardClick}
                       onDeleteClick={handlePlaceDeleteClick}
+
+                      onClose={closeAllPopups}
+                      card={selectedCard}
+                      isOpen={isPlaceDeletePopupOpen}
                 />
 
-                <PopupWithForm onClose={closeAllPopups}
-                               isOpen={isEditProfilePopupOpen}
-                               name='profile'
-                               title='Редактировать профиль'
-                               buttonText='Сохранить'>
-                    <input name="name" type="text" placeholder="Имя"
-                           className="popup__form-input popup__form-name"
-                           minLength="2" maxLength="40"
-                           id="profile-name-input" required/>
-                    <span className="popup__form-input-error profile-name-input-error"></span>
-                    <input name="about" type="text" placeholder="О себе"
-                           className="popup__form-input popup__form-additional"
-                           minLength="2" maxLength="200"
-                           id="profile-profession-input" required/>
-                    <span className="popup__form-input-error profile-profession-input-error"></span>
-                </PopupWithForm>
+                <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups}
+                                  onUpdateUser={handleUpdateUser}/>
 
                 <PopupWithForm onClose={closeAllPopups}
                                isOpen={isAddPlacePopupOpen}
@@ -116,11 +116,6 @@ function App() {
                 <ImagePopup onClose={closeAllPopups}
                             card={selectedCard}
                             isOpen={isImagePopupOpen}
-                />
-
-                <PopupPlaceDelete onClose={closeAllPopups}
-                                  card={selectedCard}
-                                  isOpen={isPlaceDeletePopupOpen}
                 />
 
                 <Footer/>

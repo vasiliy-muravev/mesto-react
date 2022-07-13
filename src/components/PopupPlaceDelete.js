@@ -1,21 +1,10 @@
-import {api} from "../utils/Api";
-
-function PopupPlaceDelete({card, isOpen, onClose}) {
+function PopupPlaceDelete({card, isOpen, onClose, onDeleteSubmit}) {
 
     function handleSubmit(e) {
+        /* Запрещаем браузеру переходить по адресу формы */
         e.preventDefault();
-        /* Удаление реализовано через получение id карточки из попапа удаления места */
-        let cardElement = document.getElementById(card._id);
-        console.log(card, cardElement);
-
-        api.deleteCard(card._id).then(() => {
-            cardElement.remove();
-            cardElement = null;
-
-            // setPlaceDeletePopupOpen(false);
-        })
-
-
+        /* Передаём значения управляемых компонентов во внешний обработчик в Main.js */
+        onDeleteSubmit(card);
     }
 
     return (

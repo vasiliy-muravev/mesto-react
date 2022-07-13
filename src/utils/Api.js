@@ -84,5 +84,10 @@ class Api {
     }
 }
 
+export function renameButton(popupSelector, text) {
+    const popup = document.querySelector(popupSelector);
+    const submit = popup.querySelector('.popup__form-submit-btn');
+    submit.textContent = text;
+}
 
 export const api = new Api('https://mesto.nomoreparties.co/v1/cohort-42/');
