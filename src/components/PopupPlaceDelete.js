@@ -1,4 +1,4 @@
-function PopupPlaceDelete({card, isOpen, onClose, onDeleteSubmit}) {
+function PopupPlaceDelete({card, isOpen, onClose, onDeleteSubmit, isLoading}) {
 
     function handleSubmit(e) {
         /* Запрещаем браузеру переходить по адресу формы */
@@ -16,7 +16,7 @@ function PopupPlaceDelete({card, isOpen, onClose, onDeleteSubmit}) {
                     <form className="popup__form popup__form_place-delete" method="post" name="placeDeleteForm"
                           noValidate onSubmit={handleSubmit} data-id={card._id}>
                         <button type="submit" className="popup__form-submit-btn">
-                            Да
+                            {isLoading ? "Удаление..." : "Да"}
                         </button>
                     </form>
                 </div>

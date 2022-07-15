@@ -1,10 +1,16 @@
 import PopupWithForm from "./PopupWithForm";
 import React from "react";
 
-function AddPlacePopup({isOpen, onClose, onAddPlace}) {
+function AddPlacePopup({isOpen, onClose, onAddPlace, isLoading}) {
     /* Стейт, в котором содержится значение инпута, управляемые поля ввода */
     const [name, setName] = React.useState('');
     const [link, setLink] = React.useState('');
+
+    /* Эффект реагирует на пропс isOpen и очищает значения в инпутах при открытии попала*/
+    React.useEffect(() => {
+        setName('');
+        setLink('');
+    }, [isOpen]);
 
     /* Обработчик изменения инпута обновляет стейт */
     function handleChangeName(e) {
@@ -31,7 +37,7 @@ function AddPlacePopup({isOpen, onClose, onAddPlace}) {
                        onSubmit={handleSubmit}
                        name='place'
                        title='Новое место'
-                       buttonText='Сохранить'>
+                       buttonText={`${isLoading ? 'Сохранение...' : 'Сохранить'}`}>
             <input value={name || ''} onChange={handleChangeName} name="name" type="text" placeholder="Название"
                    className="popup__form-input popup__form-name"
                    minLength="2" maxLength="30" id="place-name-input" required/>

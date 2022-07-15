@@ -7,10 +7,9 @@ import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
 import React from "react";
 import {useState} from "react";
-import {api, renameButton} from "../utils/Api";
+import {api} from "../utils/Api";
 import {CurrentUserContext} from '../contexts/CurrentUserContext.js';
 import AddPlacePopup from "./AddPlacePopup";
-
 
 function App() {
     /* Начальное состояние попапов - закрыты */
@@ -21,6 +20,7 @@ function App() {
     const [selectedCard, setSelectedCardState] = useState({});
     const [isPlaceDeletePopupOpen, setPlaceDeletePopupOpen] = useState(false);
     const [cards, setCardState] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
 
     /* Контекст текущего пользователя */
     const [currentUser, setCurrentUser] = useState({});
@@ -62,24 +62,24 @@ function App() {
 
     /* Изменение данных пользователя */
     const handleUpdateUser = (formData) => {
-        renameButton('.popup_type_profile', 'Сохранение...');
+        setIsLoading(true);
         api.setUserData(formData).then((userData) => {
             setCurrentUser(userData);
             closeAllPopups();
         }).finally(() => {
-            renameButton('.popup_type_profile', 'Сохранить');
+            setIsLoading(false);
         });
     };
 
     /* Изменение аватара */
     const handleUpdateAvatar = (avatar) => {
-        renameButton('.popup_type_avatar-change', 'Сохранение...');
+        setIsLoading(true);
         api.setAvatar(avatar)
             .then((userData) => {
                 setCurrentUser(userData);
                 closeAllPopups();
             }).finally(() => {
-            renameButton('.popup_type_avatar-change', 'Сохранить');
+            setIsLoading(false);
         });
     };
 
@@ -104,24 +104,24 @@ function App() {
 
     /* Обработчик подтверждения удаления карточки */
     const handlePlaceDeleteSubmit = (card) => {
-        renameButton('.popup_place-delete', 'Удаление...');
+        setIsLoading(true);
         api.deleteCard(card._id).then(() => {
             setCardState(currentCards => currentCards.filter((c) => c._id !== card._id));
             closeAllPopups();
         }).finally(() => {
-            renameButton('.popup_place-delete', 'Да');
+            setIsLoading(false);
         });
     };
 
     /* Обработчик добавления карточки */
     const handleAddPlaceSubmit = (formData) => {
-        renameButton('.popup_type_place', 'Сохранение...');
+        setIsLoading(true);
         api.addCard(formData).then((newCard) => {
             setCardState([newCard, ...cards]);
             closeAllPopups();
         }).finally(() => {
-                renameButton('.popup_type_place', 'Сохранить');
-            });
+            setIsLoading(false);
+        });
     }
 
     return (
@@ -139,19 +139,23 @@ function App() {
                       isOpen={isPlaceDeletePopupOpen}
                       cards={cards}
                       onCardLike={handleCardLike}
-                      onCardDeleteSubmit={handlePlaceDeleteSubmit}/>
+                      onCardDeleteSubmit={handlePlaceDeleteSubmit}
+                      isLoading={isLoading}/>
 
                 <EditProfilePopup isOpen={isEditProfilePopupOpen}
                                   onClose={closeAllPopups}
-                                  onUpdateUser={handleUpdateUser}/>
+                                  onUpdateUser={handleUpdateUser}
+                                  isLoading={isLoading}/>
 
                 <AddPlacePopup isOpen={isAddPlacePopupOpen}
                                onClose={closeAllPopups}
-                               onAddPlace={handleAddPlaceSubmit}/>
+                               onAddPlace={handleAddPlaceSubmit}
+                               isLoading={isLoading}/>
 
                 <EditAvatarPopup isOpen={isEditAvatarPopupOpen}
                                  onClose={closeAllPopups}
-                                 onUpdateAvatar={handleUpdateAvatar}/>
+                                 onUpdateAvatar={handleUpdateAvatar}
+                                 isLoading={isLoading}/>
 
                 <ImagePopup onClose={closeAllPopups}
                             card={selectedCard}

@@ -14,7 +14,8 @@ function Main({
                   isOpen,
                   cards,
                   onCardLike,
-                  onCardDeleteSubmit
+                  onCardDeleteSubmit,
+                  isLoading
               }) {
     /* Подписываемся на контекст UserContext */
     const user = React.useContext(CurrentUserContext);
@@ -45,6 +46,7 @@ function Main({
                               card={card}
                               isOpen={isOpen}
                               onDeleteSubmit={onCardDeleteSubmit}
+                              isLoading={isLoading}
             />
         </>
     )

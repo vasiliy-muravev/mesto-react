@@ -2,7 +2,7 @@ import PopupWithForm from "./PopupWithForm";
 import React from "react";
 import {CurrentUserContext} from "../contexts/CurrentUserContext";
 
-function EditProfilePopup({isOpen, onClose, onUpdateUser}) {
+function EditProfilePopup({isOpen, onClose, onUpdateUser, isLoading}) {
     /* Стейт, в котором содержится значение инпута, управляемые поля ввода */
     const [name, setName] = React.useState('');
     const [description, setDescription] = React.useState('');
@@ -42,7 +42,7 @@ function EditProfilePopup({isOpen, onClose, onUpdateUser}) {
                        onSubmit={handleSubmit}
                        name='profile'
                        title='Редактировать профиль'
-                       buttonText='Сохранить'>
+                       buttonText={`${isLoading ? 'Сохранение...' : 'Сохранить'}`}>
             <input value={name || ''} onChange={handleChangeName} name="name" type="text" placeholder="Имя"
                    className="popup__form-input popup__form-name"
                    minLength="2" maxLength="40"
