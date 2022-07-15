@@ -1,6 +1,4 @@
-import {useState} from "react";
 import React from "react";
-import {api, renameButton} from '../utils/Api.js';
 import Card from "./Card.js";
 import {CurrentUserContext} from '../contexts/CurrentUserContext.js';
 import PopupPlaceDelete from "./PopupPlaceDelete";

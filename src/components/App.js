@@ -2,14 +2,13 @@ import '../index.css';
 import Header from "./Header.js";
 import Main from "./Main.js";
 import Footer from "./Footer.js";
-import PopupWithForm from "./PopupWithForm.js";
 import ImagePopup from "./ImagePopup.js";
 import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
 import React from "react";
 import {useState} from "react";
 import {api, renameButton} from "../utils/Api";
-import {CurrentUserContext, user} from '../contexts/CurrentUserContext.js';
+import {CurrentUserContext} from '../contexts/CurrentUserContext.js';
 import AddPlacePopup from "./AddPlacePopup";
 
 
